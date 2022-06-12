@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import type { PropType, StyleValue, VNode } from 'vue'
-import { ref, computed, useSlots, onUpdated } from 'vue'
+import { shallowRef, computed, useSlots, onUpdated } from 'vue'
 
 import { filterChildren } from '../utils/utils'
 
@@ -38,7 +38,7 @@ const props = defineProps({
 // Slot
 const slots = useSlots()
 const genChilds = () => filterChildren(slots.default?.())
-const childs = ref(genChilds())
+const childs = shallowRef(genChilds())
 
 onUpdated(() => {
   childs.value = genChilds()

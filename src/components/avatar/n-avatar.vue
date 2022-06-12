@@ -31,7 +31,7 @@ const props = defineProps({
   /** 图像无法显示时的替代文本 */
   alt: { type: String, default: '' },
   /** 设置头像的自定义图标 */
-  icon: { type: Object as PropType<Component | null>, default: null },
+  icon: { type: Object as PropType<Component> },
   /** 指定头像的形状 */
   shape: { type: String as PropType<'circle' | 'square'>, default: 'circle' },
   /** 字符类型距离左右两侧边界单位像素 */
