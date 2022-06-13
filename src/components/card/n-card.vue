@@ -3,6 +3,9 @@
     :class="[
       'text-base text-content leading-base bg-white rounded-base',
       bordered ? 'border-1 border-solid border-[rgba(0,0,0,0.06)]' : '',
+      hoverable
+        ? 'cursor-pointer transition-input duration-300 hover:(border-transparent shadow-card)'
+        : '',
     ]"
   >
     <div
@@ -59,6 +62,8 @@ defineProps({
   bodyStyle: { type: [String, Object, Array] as PropType<StyleValue> },
   /** 是否有边框 */
   bordered: { type: Boolean, default: true },
+  /** 鼠标移过时可浮起 */
+  hoverable: { type: Boolean, default: false },
   /** 尺寸 */
   size: { type: String as PropType<'default' | 'small'>, default: 'default' },
   /** 卡片标题 */

@@ -33,6 +33,15 @@ BodyStyle.args = {
   bodyStyle: 'font-size: 20px; color: #2f54eb',
 }
 
+export const Bordered = Default.bind({})
+Bordered.args = {
+  ...Title.args,
+  bordered: false,
+}
+Bordered.parameters = {
+  backgrounds: { default: 'light' },
+}
+
 export const Cover: Story = (args) => ({
   components: {
     NCard,
@@ -87,5 +96,10 @@ export const Actions: Story = (args) => ({
     </n-card>
   `,
 })
+
+export const Hoverable = Cover.bind({})
+Hoverable.args = {
+  hoverable: true,
+}
 
 export default meta
