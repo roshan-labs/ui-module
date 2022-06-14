@@ -1,6 +1,8 @@
 import type { Meta, Story } from '@storybook/vue3'
 
+import NAvatar from '../avatar/n-avatar.vue'
 import NCard from './n-card.vue'
+import NCardMeta from './n-card-meta.vue'
 import IconSetting from '~icons/ant-design/setting-outlined'
 import IconEdit from '~icons/ant-design/edit-outlined'
 
@@ -84,12 +86,19 @@ Size.args = {
 export const Actions: Story = (args) => ({
   components: {
     NCard,
+    NCardMeta,
+    NAvatar,
     IconSetting,
     IconEdit,
   },
   setup: () => ({ args }),
   template: `
     <n-card v-bind="args">
+      <n-card-meta title="我是标题" description="我是描述信息">
+        <template #avatar>
+          <n-avatar src="https://joeschmoe.io/api/v1/jess" />
+        </template>
+      </n-card-meta>
       <template #actions>
         <icon-setting key="setting" />
         <icon-edit key="edit" />
@@ -98,3 +107,26 @@ export const Actions: Story = (args) => ({
     </n-card>
   `,
 })
+
+export const InnerCard: Story = (args) => ({
+  components: {
+    NCard,
+  },
+  setup: () => ({ args }),
+  template: `
+    <n-card title="我是标题">
+      <n-card v-for="n in 2" :key="n" class="mb-md last:mb-0" v-bind="args">
+        <template #extra>
+          <a href="#">更多</a>
+        </template>
+        {{ args.default }}
+      </n-card>
+    </n-card>
+  `,
+})
+InnerCard.args = {
+  type: 'inner',
+  title: '内部卡片',
+  default: '内部卡片内容',
+  size: 'small',
+}

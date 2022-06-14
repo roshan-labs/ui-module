@@ -30,5 +30,6 @@ export const Default: Story = (args) => ({
   `,
 })
 Default.args = {
-  title: '元信息标题',
+  title: '我是标题',
+  description: '我是描述信息',
 }

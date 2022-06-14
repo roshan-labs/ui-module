@@ -8,32 +8,45 @@
         : '',
     ]"
   >
+    <!-- HEAD -->
     <div
       v-if="title || $slots.title"
       :class="[
         'flex items-center font-medium border-b border-solid border-[rgba(0,0,0,0.06)] mb-[-1px]',
         size === 'small' ? 'px-sm' : 'text-lg px-lg',
+        type === 'inner' ? 'bg-[#fafafa]' : '',
       ]"
     >
-      <div :class="['flex-1', size === 'small' ? 'py-xs' : 'py-md']">
+      <div
+        :class="[
+          'flex-1',
+          size === 'small' ? 'py-xs' : type === 'inner' ? 'text-base py-sm' : 'py-md',
+        ]"
+      >
         <slot name="title">{{ title }}</slot>
       </div>
       <div
         v-if="$slots.extra"
-        :class="['text-base font-normal', size === 'small' ? 'py-xs' : 'py-md']"
+        :class="[
+          'text-base font-normal',
+          size === 'small' ? 'py-xs' : type === 'inner' ? 'py-sm' : 'py-md',
+        ]"
       >
         <slot name="extra" />
       </div>
     </div>
+    <!-- COVER -->
     <div
       v-if="$slots.cover"
       class="mt-[-1px] mr-[-1px] ml-[-1px] overflow-hidden rounded-tr-base rounded-tl-base children:(block w-full)"
     >
       <slot name="cover" />
     </div>
+    <!-- BODY -->
     <div :class="bodyClasses" :style="bodyStyle">
       <slot />
     </div>
+    <!-- ACTIONS -->
     <ul v-if="$slots.actions" class="flex border-t border-solid border-[rgba(0,0,0,0.06)]">
       <li
         v-for="(item, index) in actionChilds"
@@ -69,6 +82,8 @@ const props = defineProps({
   size: { type: String as PropType<'default' | 'small'>, default: 'default' },
   /** 卡片标题 */
   title: { type: String, default: '' },
+  /** 卡片类型，inner 内部卡片 */
+  type: { type: String as PropType<'inner'> },
 })
 
 // actions
