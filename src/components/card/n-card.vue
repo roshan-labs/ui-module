@@ -31,7 +31,7 @@
     >
       <slot name="cover" />
     </div>
-    <div :class="[size === 'small' ? 'p-sm' : 'p-lg']" :style="bodyStyle">
+    <div :class="bodyClasses" :style="bodyStyle">
       <slot />
     </div>
     <ul v-if="$slots.actions" class="flex border-t border-solid border-[rgba(0,0,0,0.06)]">
@@ -52,12 +52,13 @@
 
 <script lang="ts" setup>
 import type { PropType, StyleValue } from 'vue'
-import { shallowRef, computed, useSlots, onUpdated } from 'vue'
+import { shallowRef, ref, computed, useSlots, onUpdated, provide } from 'vue'
 
 import NIcon from '../icon/n-icon.vue'
 import { filterChildren } from '../utils/utils'
+import { injectionKey } from './utils'
 
-defineProps({
+const props = defineProps({
   /** 内容区域自定义样式 */
   bodyStyle: { type: [String, Object, Array] as PropType<StyleValue> },
   /** 是否有边框 */
@@ -82,5 +83,22 @@ onUpdated(() => {
   if (slots.actions) {
     actionChilds.value = getActionChilds()
   }
+})
+
+// CardGrid
+const hasCardGrid = ref(false)
+provide(injectionKey, hasCardGrid)
+
+// Classes
+const bodyClasses = computed(() => {
+  const result: string[] = []
+
+  if (hasCardGrid.value) {
+    result.push('flex flex-wrap mt-[-1px] ml-[-1px]')
+  } else {
+    result.push(props.size === 'small' ? 'p-sm' : 'p-lg')
+  }
+
+  return result
 })
 </script>

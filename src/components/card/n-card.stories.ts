@@ -10,6 +10,8 @@ const meta: Meta = {
   decorators: [() => ({ template: '<div class="w-[300px]"><story /></div>' })],
 }
 
+export default meta
+
 export const Default: Story = (args) => ({
   components: { NCard },
   setup: () => ({ args }),
@@ -96,10 +98,3 @@ export const Actions: Story = (args) => ({
     </n-card>
   `,
 })
-
-export const Hoverable = Cover.bind({})
-Hoverable.args = {
-  hoverable: true,
-}
-
-export default meta

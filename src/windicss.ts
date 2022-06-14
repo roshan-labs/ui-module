@@ -81,6 +81,10 @@ const defultWindiConfig = defineConfig({
         'input-error': '0 0 0 2px rgba(255, 77, 79, 0.2)',
         'input-warning': '0 0 0 2px rgba(250, 173, 20, 0.2)',
         card: '0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017',
+        'card-grid':
+          '1px 0 #0000000f, 0 1px #0000000f, 1px 1px #0000000f, 1px 0 #0000000f inset, 0 1px #0000000f inset',
+        'card-grid-hover':
+          '0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017',
       },
       transitionProperty: {
         input: 'border-color, box-shadow',
