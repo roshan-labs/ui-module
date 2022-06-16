@@ -35,3 +35,13 @@ ParagraphWidthArray.args = {
     width: ['10%', '20%', '30%', '40%', 100],
   },
 }
+
+export const Round = Default.bind({})
+Round.args = {
+  round: true,
+}
+
+export const Avatar = Default.bind({})
+Avatar.args = {
+  avatar: true,
+}

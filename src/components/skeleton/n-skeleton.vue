@@ -1,11 +1,13 @@
 <template>
   <div class="flex">
+    <!-- AVATAR -->
+    <n-skeleton-avatar v-if="avatar" />
     <!-- CONTENT -->
     <div class="flex-1">
       <!-- TITLE -->
       <h3
         v-if="title"
-        class="h-[16px] bg-[rgba(190,190,190,0.2)] rounded-[4px]"
+        :class="['h-[16px] bg-[rgba(190,190,190,0.2)]', round ? 'rounded-full' : 'rounded-[4px]']"
         :style="titleWidth"
       ></h3>
       <!-- PARAGRAPH -->
@@ -13,7 +15,10 @@
         <li
           v-for="(item, index) in rows"
           :key="index"
-          class="h-[16px] bg-[rgba(190,190,190,0.2)] rounded-[4px] not-last:mb-md"
+          :class="[
+            'h-[16px] bg-[rgba(190,190,190,0.2)] not-last:mb-md',
+            round ? 'rounded-full' : 'rounded-[4px]',
+          ]"
           :style="item"
         ></li>
       </ul>
@@ -26,11 +31,16 @@ import type { PropType, StyleValue } from 'vue'
 import { computed } from 'vue'
 
 import { addUnit } from '../utils/utils'
-import type { SkeletonTitle, SkeletonParagraph } from './types'
+import type { SkeletonTitle, SkeletonParagraph, SkeletonAvatar } from './types'
+import NSkeletonAvatar from './n-skeleton-avatar.vue'
 
 const props = defineProps({
+  /** 是否显示头像占位图 */
+  avatar: { type: [Boolean, Object] as PropType<boolean | SkeletonAvatar>, default: false },
   /** 是否显示段落占位图 */
   paragraph: { type: [Boolean, Object] as PropType<boolean | SkeletonParagraph>, default: true },
+  /** 段落和标题显示圆角 */
+  round: { type: Boolean, default: false },
   /** 是否显示标题占位图 */
   title: { type: [Boolean, Object] as PropType<boolean | SkeletonTitle>, default: true },
 })
