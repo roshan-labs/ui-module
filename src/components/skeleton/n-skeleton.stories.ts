@@ -14,3 +14,24 @@ export const Default: Story = (args) => ({
   setup: () => ({ args }),
   template: '<n-skeleton v-bind="args" />',
 })
+
+export const Title = Default.bind({})
+Title.args = {
+  title: { width: '50%' },
+}
+
+export const Paragraph = Default.bind({})
+Paragraph.args = {
+  paragraph: {
+    rows: 5,
+    width: '50%',
+  },
+}
+
+export const ParagraphWidthArray = Default.bind({})
+ParagraphWidthArray.args = {
+  paragraph: {
+    rows: 5,
+    width: ['10%', '20%', '30%', '40%', 100],
+  },
+}

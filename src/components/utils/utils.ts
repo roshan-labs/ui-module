@@ -21,7 +21,7 @@ export function filterChildren(children: VNode[] = []) {
 }
 
 export function addUnit(value: string | number, unit: string = 'px') {
-  if (!value) return ''
+  if (typeof value === 'string' && !value) return ''
   if (typeof value === 'string') return value
   if (typeof value === 'number') return `${value}${unit}`
 }
