@@ -1,13 +1,19 @@
 <template>
   <div class="flex">
     <!-- AVATAR -->
-    <n-skeleton-avatar v-if="avatar" />
+    <div v-if="avatar" class="mr-md">
+      <n-skeleton-avatar size="large" />
+    </div>
     <!-- CONTENT -->
     <div class="flex-1">
       <!-- TITLE -->
       <h3
         v-if="title"
-        :class="['h-[16px] bg-[rgba(190,190,190,0.2)]', round ? 'rounded-full' : 'rounded-[4px]']"
+        :class="[
+          'h-[16px] bg-[rgba(190,190,190,0.2)]',
+          round ? 'rounded-full' : 'rounded-[4px]',
+          avatar ? 'mt-sm' : '',
+        ]"
         :style="titleWidth"
       ></h3>
       <!-- PARAGRAPH -->
@@ -35,6 +41,8 @@ import type { SkeletonTitle, SkeletonParagraph, SkeletonAvatar } from './types'
 import NSkeletonAvatar from './n-skeleton-avatar.vue'
 
 const props = defineProps({
+  /** 是否展示动画效果 */
+  active: { type: Boolean, default: false },
   /** 是否显示头像占位图 */
   avatar: { type: [Boolean, Object] as PropType<boolean | SkeletonAvatar>, default: false },
   /** 是否显示段落占位图 */
@@ -59,9 +67,9 @@ const titleWidth = computed<StyleValue>(() => {
 // Paragraph
 const rows = computed(() => {
   if (typeof props.paragraph === 'object') {
-    const result = Array.from({
-      length: typeof props.paragraph.rows === 'number' ? props.paragraph.rows : 3,
-    })
+    const length =
+      typeof props.paragraph.rows === 'number' ? props.paragraph.rows : props.avatar ? 2 : 3
+    const result = Array.from({ length })
     const { width } = props.paragraph
 
     return result.map((_, index, array) => {
@@ -81,7 +89,7 @@ const rows = computed(() => {
     })
   }
 
-  return Array.from({ length: 3 }).map((_, index, array) =>
+  return Array.from({ length: props.avatar ? 2 : 3 }).map((_, index, array) =>
     index === array.length - 1 ? { width: '61%' } : { width: '' }
   )
 })

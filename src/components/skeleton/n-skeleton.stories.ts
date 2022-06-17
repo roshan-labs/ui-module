@@ -28,8 +28,8 @@ Paragraph.args = {
   },
 }
 
-export const ParagraphWidthArray = Default.bind({})
-ParagraphWidthArray.args = {
+export const ParagraphConfig = Default.bind({})
+ParagraphConfig.args = {
   paragraph: {
     rows: 5,
     width: ['10%', '20%', '30%', '40%', 100],
@@ -44,4 +44,15 @@ Round.args = {
 export const Avatar = Default.bind({})
 Avatar.args = {
   avatar: true,
+}
+
+export const AvatarWithParagraph = Default.bind({})
+AvatarWithParagraph.args = {
+  ...Avatar.args,
+  paragraph: { width: 100 },
+}
+
+export const Active = Default.bind({})
+Active.args = {
+  active: true,
 }
