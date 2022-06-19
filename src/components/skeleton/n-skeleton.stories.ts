@@ -12,7 +12,7 @@ export default meta
 export const Default: Story = (args) => ({
   components: { NSkeleton },
   setup: () => ({ args }),
-  template: '<n-skeleton v-bind="args" />',
+  template: '<n-skeleton v-bind="args">{{ args.default }}</n-skeleton>',
 })
 
 export const Title = Default.bind({})
@@ -41,18 +41,27 @@ Round.args = {
   round: true,
 }
 
-export const Avatar = Default.bind({})
-Avatar.args = {
+export const WithAvatar = Default.bind({})
+WithAvatar.args = {
   avatar: true,
 }
 
-export const AvatarWithParagraph = Default.bind({})
-AvatarWithParagraph.args = {
-  ...Avatar.args,
-  paragraph: { width: 100 },
+export const WithAvatarConfig = Default.bind({})
+WithAvatarConfig.args = {
+  avatar: {
+    shape: 'square',
+    size: 'default',
+  },
 }
 
 export const Active = Default.bind({})
 Active.args = {
+  avatar: true,
   active: true,
+}
+
+export const Loading = Default.bind({})
+Loading.args = {
+  loading: false,
+  default: '当 loading 为 false 时，你才会看到我哟',
 }

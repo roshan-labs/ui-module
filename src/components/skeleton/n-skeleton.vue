@@ -1,34 +1,47 @@
 <template>
-  <div class="flex">
-    <!-- AVATAR -->
-    <div v-if="avatar" class="mr-md">
-      <n-skeleton-avatar size="large" />
-    </div>
-    <!-- CONTENT -->
-    <div class="flex-1">
-      <!-- TITLE -->
-      <h3
-        v-if="title"
-        :class="[
-          'h-[16px] bg-[rgba(190,190,190,0.2)]',
-          round ? 'rounded-full' : 'rounded-[4px]',
-          avatar ? 'mt-sm' : '',
-        ]"
-        :style="titleWidth"
-      ></h3>
-      <!-- PARAGRAPH -->
-      <ul v-if="paragraph" :class="[title ? 'mt-lg' : '']">
-        <li
-          v-for="(item, index) in rows"
-          :key="index"
+  <div :class="[loading ? 'flex' : '']">
+    <template v-if="loading">
+      <!-- AVATAR -->
+      <div v-if="avatar" class="mr-md">
+        <n-skeleton-avatar
+          v-bind="typeof avatar === 'object' ? avatar : { size: 'large' }"
+          :active="active"
+        />
+      </div>
+      <!-- CONTENT -->
+      <div class="flex-1">
+        <!-- TITLE -->
+        <h3
+          v-if="title"
           :class="[
-            'h-[16px] bg-[rgba(190,190,190,0.2)] not-last:mb-md',
+            'h-[16px]',
             round ? 'rounded-full' : 'rounded-[4px]',
+            avatar ? 'mt-sm' : '',
+            active
+              ? 'relative bg-white overflow-hidden after:(content-[attr(data-content)] absolute inset-y-0 -inset-x-[150%] bg-skeleton animate-skeleton-loading)'
+              : 'bg-[rgba(190,190,190,0.2)]',
           ]"
-          :style="item"
-        ></li>
-      </ul>
-    </div>
+          :style="titleWidth"
+          data-content=""
+        ></h3>
+        <!-- PARAGRAPH -->
+        <ul v-if="paragraph" :class="[title ? 'mt-lg' : '']">
+          <li
+            v-for="(item, index) in rows"
+            :key="index"
+            :class="[
+              'h-[16px] not-last:mb-md',
+              round ? 'rounded-full' : 'rounded-[4px]',
+              active
+                ? 'relative bg-white overflow-hidden after:(content-[attr(data-content)] absolute inset-y-0 -inset-x-[150%] bg-skeleton animate-skeleton-loading)'
+                : 'bg-[rgba(190,190,190,0.2)]',
+            ]"
+            :style="item"
+          ></li>
+        </ul>
+      </div>
+    </template>
+    <slot v-else />
   </div>
 </template>
 
@@ -45,6 +58,8 @@ const props = defineProps({
   active: { type: Boolean, default: false },
   /** 是否显示头像占位图 */
   avatar: { type: [Boolean, Object] as PropType<boolean | SkeletonAvatar>, default: false },
+  /** 为 true 时，显示占位图。反之则直接展示子组件 */
+  loading: { type: Boolean, default: true },
   /** 是否显示段落占位图 */
   paragraph: { type: [Boolean, Object] as PropType<boolean | SkeletonParagraph>, default: true },
   /** 段落和标题显示圆角 */

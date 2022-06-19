@@ -1,11 +1,14 @@
 <template>
   <div
     :class="[
-      'inline-block bg-[rgba(190,190,190,0.2)]',
+      'inline-block align-top',
       size === 'small' ? 'w-sm h-sm' : '',
       size === 'default' ? 'w-base h-base' : '',
       size === 'large' ? 'w-lg h-lg' : '',
       shape === 'circle' ? 'rounded-1/2' : '',
+      active
+        ? 'relative bg-white overflow-hidden after:(content-[attr(data-content)] absolute inset-y-0 -inset-x-[150%] bg-skeleton animate-skeleton-loading)'
+        : 'bg-[rgba(190,190,190,0.2)]',
     ]"
     :style="style"
   ></div>

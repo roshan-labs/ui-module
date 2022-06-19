@@ -86,11 +86,24 @@ const defultWindiConfig = defineConfig({
         'card-grid-hover':
           '0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017',
       },
+      backgroundImage: {
+        skeleton:
+          'linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%)',
+      },
       transitionProperty: {
         input: 'border-color, box-shadow',
       },
       transitionTimingFunction: {
         'in-out': 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+      },
+      animation: {
+        'skeleton-loading': 'skeleton 1.4s ease infinite',
+      },
+      keyframes: {
+        skeleton: {
+          '0%': { transform: 'translateX(-37.5%)' },
+          '100%': { transform: 'translateX(37.5%)' },
+        },
       },
       padding: space,
       margin: space,
